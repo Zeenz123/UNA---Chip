@@ -1954,7 +1954,7 @@ endmodule
  **                                                                          **
  *****************************************************************************/
 
-module CPU( ADDRESSBUSOUT,
+module tt_um_CPU( ADDRESSBUSOUT,
             BUTTON2BUS,
             BUTTONPRESSED,
             BUTTONRST,
