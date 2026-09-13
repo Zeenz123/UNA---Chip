@@ -1,8 +1,9 @@
+/* verilator lint_off LATCH */
+/* verilator lint_off UNOPTFLAT */
 /* verilator lint_off PINCONNECTEMPTY */
 /* verilator lint_off PINMISSING */
 /* verilator lint_off UNUSEDSIGNAL */
 /* verilator lint_off UNDRIVEN */
-
 /* ==========================================================================
    1. TINY TAPEOUT SKY130 MASTER HARDWARE WRAPPER (THE TOP MODULE)
    ========================================================================== */
