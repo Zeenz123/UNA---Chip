@@ -60,3 +60,18 @@ endmodule
 
 module AND_GATE_3_INPUTS #(parameter BubblesMask = 3'b000) (input input1, input2, input3, output result);
     assign result = input1 & input2 & input3;
+module OR_GATE_3_INPUTS #(parameter BubblesMask = 3'b000) (input input1, input2, input3, output result);
+    assign result = input1 | input2 | input3;
+endmodule
+
+module OR_GATE_4_INPUTS #(parameter BubblesMask = 4'h0) (input input1, input2, input3, input4, output result);
+    assign result = input1 | input2 | input3 | input4;
+endmodule
+
+module OR_GATE_5_INPUTS #(parameter BubblesMask = 5'b00000) (input input1, input2, input3, input4, input5, output result);
+    assign result = input1 | input2 | input3 | input4 | input5;
+endmodule
+
+module OR_GATE_10_INPUTS #(parameter BubblesMask = 10'h000) (
+    input input1, input2, input3, input4, input5, input6, input7, input8, input9, input10, output result
+);
