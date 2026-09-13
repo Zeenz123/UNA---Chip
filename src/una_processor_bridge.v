@@ -1,6 +1,5 @@
-
 /* ==========================================================================
-   1. LOGISIM-EVOLUTION STANDARD GATE AND COMPONENT LIBRARY (PRIMITIVES)
+   LOGISIM-EVOLUTION STANDARD GATE AND COMPONENT LIBRARY (PRIMITIVES)
    ========================================================================== */
 
 module AND_GATE #(parameter BubblesMask = 2'b00) (input input1, input2, output result);
@@ -17,6 +16,8 @@ endmodule
 
 module AND_GATE_3_INPUTS #(parameter BubblesMask = 3'b000) (input input1, input2, input3, output result);
     assign result = input1 & input2 & input3;
+endmodule
+
 module OR_GATE_3_INPUTS #(parameter BubblesMask = 3'b000) (input input1, input2, input3, output result);
     assign result = input1 | input2 | input3;
 endmodule
