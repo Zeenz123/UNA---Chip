@@ -2164,6 +2164,7 @@ module CPU( ADDRESSBUSOUT,
                     .DELAYTIME(s_logisimBus1[15:0]),
                     .ENCLK(s_logisimNet34),
                     .RST(s_logisimNet10));
+endmodule
 
 // Tiny Tapeout Top-Level Hardware Wrapper
 module tt_um_CPU (
