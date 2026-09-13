@@ -218,11 +218,22 @@ module ARITH_8 (
     assign result = (dataX < minDataX) ? dataX : minDataX;
 endmodule
 
+// Updated Latch Primitive: Natively handles your CPU's .clockEnable signal
 module REGISTER_LATCH #(parameter invertClock = 0, parameter nrOfBits = 8) (
-    input clock, input [nrOfBits-1:0] d, output reg [nrOfBits-1:0] q, input reset, tick
+    input clock, 
+    input clockEnable,              // <-- Added clockEnable port support here!
+    input [nrOfBits-1:0] d, 
+    output reg [nrOfBits-1:0] q, 
+    input reset, 
+    input tick
 );
-    always @(posedge clock or posedge reset) begin
-        if (reset) q <= 0;
-        else if (tick) q <= d;
+    // Combine the trigger networks: latch updates only when the clock AND enable are active
+    wire latch_gate = clock & (clockEnable | tick);
+
+    always @(*) begin
+        if (reset) 
+            q = 0;
+        else if (latch_gate) 
+            q = d;
     end
 endmodule
