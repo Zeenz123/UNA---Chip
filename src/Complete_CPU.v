@@ -1954,7 +1954,7 @@ endmodule
  **                                                                          **
  *****************************************************************************/
 
-module tt_um_CPU( ADDRESSBUSOUT,
+module CPU( ADDRESSBUSOUT,
             BUTTON2BUS,
             BUTTONPRESSED,
             BUTTONRST,
@@ -2164,5 +2164,31 @@ module tt_um_CPU( ADDRESSBUSOUT,
                     .DELAYTIME(s_logisimBus1[15:0]),
                     .ENCLK(s_logisimNet34),
                     .RST(s_logisimNet10));
+
+// Tiny Tapeout Top-Level Hardware Wrapper
+module tt_um_CPU (
+    input  wire [7:0] ui_in,    // Dedicated inputs
+    output wire [7:0] uo_out,   // Dedicated outputs
+    input  wire [7:0] uio_in,   // IOs: Input path
+    output wire [7:0] uio_out,  // IOs: Output path
+    output wire [7:0] uio_oe,   // IOs: Enable path
+    input  wire       ena,      // design enable
+    input  wire       clk,      // clock
+    input  wire       rst_n     // reset (active low)
+);
+
+    // 1. Assign unused bidirectional pins safely to high-impedance
+    assign uio_out = 8'b00000000;
+    assign uio_oe  = 8'b00000000; // Sets bidirectional pins to input-only mode
+
+    // 2. Instantiate your custom Logisim CPU
+    // Replace the pin names inside the parentheses below (.custom_pin) 
+    // to map to Tiny Tapeout's inputs (ui_in) and outputs (uo_out)
+    CPU my_custom_processor (
+        .CLK             (clk),          // Maps Tiny Tapeout clock to your CPU clock
+        .RESET           (~rst_n),       // Inverts active-low rst_n to your active-high reset if needed
+        .INPUT_BUS       (ui_in),        // Maps the 8 external inputs to your input bus
+        .OUTPUT_BUS      (uo_out)        // Maps your CPU output bus to the 8 chip outputs
+    );
 
 endmodule
