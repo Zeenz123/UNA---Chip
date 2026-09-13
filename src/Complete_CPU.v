@@ -1851,25 +1851,25 @@ module ALU( ALUCNTRL,
                  .muxOut(s_logisimBus24[7:0]),
                  .sel(s_logisimNet51));
 
-   Negator #(.nrOfBits(8))
-      ARITH_8 (.dataX(s_logisimBus24[7:0]),
-               .minDataX(s_logisimBus19[7:0]));
+Negator #(.nrOfBits(8))
+   ARITH_8 (.datain(s_logisimBus24[7:0]),
+            .dataout(s_logisimBus19[7:0]));
 
-   Comparator #(.nrOfBits(8),
-                .twosComplement(0))
-      ARITH_9 (.aEqualsB(s_logisimBus41[2]),
-               .aGreaterThanB(s_logisimBus41[1]),
-               .aLessThanB(s_logisimBus41[3]),
-               .dataA(s_logisimBus2[7:0]),
-               .dataB(s_logisimBus3[7:0]));
+Comparator #(.nrOfBits(8))
+   ARITH_9 (.aEqualsB(s_logisimBus41[2]),
+            .aGreaterThanB(s_logisimBus41[1]),
+            .aLessThanB(s_logisimBus41[3]),
+            .dataA(s_logisimBus2[7:0]),
+            .dataB(s_logisimBus3[7:0]),
+            .twosComplement(1'b0));
 
-   Comparator #(.nrOfBits(8),
-                .twosComplement(1))
-      ARITH_10 (.aEqualsB(s_logisimBus41[5]),
-                .aGreaterThanB(s_logisimBus41[4]),
-                .aLessThanB(),
-                .dataA(s_logisimBus2[7:0]),
-                .dataB(s_logisimBus3[7:0]));
+Comparator #(.nrOfBits(8))
+   ARITH_10 (.aEqualsB(s_logisimBus41[5]),
+             .aGreaterThanB(s_logisimBus41[4]),
+             .aLessThanB(),
+             .dataA(s_logisimBus2[7:0]),
+             .dataB(s_logisimBus3[7:0]),
+             .twosComplement(1'b1));
 
    D_FLIPFLOP #(.invertClockEnable(0))
       MEMORY_11 (.clock(s_logisimNet26),
@@ -2093,7 +2093,6 @@ module CPU( ADDRESSBUSOUT,
                     .width(16))
       MEMORY_5 (.clear(s_logisimNet10),
                 .clock(s_logisimNet2),
-                .compareOut(),
                 .countValue(s_logisimBus33[15:0]),
                 .enable(s_logisimNet9),
                 .load(s_logisimNet6),
@@ -2166,4 +2165,3 @@ module CPU( ADDRESSBUSOUT,
                     .RST(s_logisimNet10));
 
 endmodule
-
