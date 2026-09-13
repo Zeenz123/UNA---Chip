@@ -18,39 +18,37 @@ project:
     - "Complete_CPU.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
+# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
 pinout:
   # Inputs
-  ui_in:
-    - "input_0"
-    - "input_1"
-    - "input_2"
-    - "input_3"
-    - "input_4"
-    - "input_5"
-    - "input_6"
-    - "input_7"
+  ui[0]: "input_0"
+  ui[1]: "input_1"
+  ui[2]: "input_2"
+  ui[3]: "input_3"
+  ui[4]: "input_4"
+  ui[5]: "input_5"
+  ui[6]: "input_6"
+  ui[7]: "input_7"
 
   # Outputs
-  uo_out:
-    - "output_0"
-    - "output_1"
-    - "output_2"
-    - "output_3"
-    - "output_4"
-    - "output_5"
-    - "output_6"
-    - "output_7"
+  uo[0]: "output_0"
+  uo[1]: "output_1"
+  uo[2]: "output_2"
+  uo[3]: "output_3"
+  uo[4]: "output_4"
+  uo[5]: "output_5"
+  uo[6]: "output_6"
+  uo[7]: "output_7"
 
   # Bidirectional pins
-  uio_in:
-    - "bidir_0"
-    - "bidir_1"
-    - "bidir_2"
-    - "bidir_3"
-    - "bidir_4"
-    - "bidir_5"
-    - "bidir_6"
-    - "bidir_7"
+  uio[0]: "bidir_0"
+  uio[1]: "bidir_1"
+  uio[2]: "bidir_2"
+  uio[3]: "bidir_3"
+  uio[4]: "bidir_4"
+  uio[5]: "bidir_5"
+  uio[6]: "bidir_6"
+  uio[7]: "bidir_7"
 
 # Do not change!
 yaml_version: 6
