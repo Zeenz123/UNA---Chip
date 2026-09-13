@@ -43,4 +43,4 @@ The layout and automation parameters of this repository are split across separat
 * **ASIC Hardening:** Final GDSII Blueprint Output Status: **SUCCESS**
 
 ---
-*Developed by Zeenz — Mapped natively from Logisim-evolution to physical hardware silicon geometry.*
+*3d Layout and manufacturable files are Developed by Zeenz — Mapped natively from Logisim-evolution to physical hardware silicon geometry.*
