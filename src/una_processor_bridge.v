@@ -93,8 +93,8 @@ module Multiplexer_bus_16 #(parameter nrOfBits = 8) (
             case(sel)
                 4'h0: muxOut = muxIn_0;   4'h1: muxOut = muxIn_1;   4'h2: muxOut = muxIn_2;   4'h3: muxOut = muxIn_3;
                 4'h4: muxOut = muxIn_4;   4'h5: muxOut = muxIn_5;   4'h6: muxOut = muxIn_6;   4'h7: muxOut = muxIn_7;
-                4'h8: muxOut = muxIn_8;   4'h9: muxOut = muxIn_9;   4'h10: muxOut = muxIn_10; 4'h11: muxOut = muxIn_11;
-                4'h12: muxOut = muxIn_12; 4'h13: muxOut = muxIn_13; 4'h14: muxOut = muxIn_14; 4'h15: muxOut = muxIn_15;
+                4'h8: muxOut = muxIn_8;   4'h9: muxOut = muxIn_9;   4'd10: muxOut = muxIn_10; 4'd11: muxOut = muxIn_11;
+                4'd12: muxOut = muxIn_12; 4'd13: muxOut = muxIn_13; 4'd14: muxOut = muxIn_14; 4'd15: muxOut = muxIn_15;
                 default: muxOut = 0;
             endcase
         end
