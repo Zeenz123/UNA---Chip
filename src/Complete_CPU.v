@@ -1159,32 +1159,32 @@ module CU( ALUCNTRL,
                 .tick(1'b1),
                 .upNotDown(s_logisimNet49));
 
-   REGISTER_LATCH #(.invertClock(0),
-                    .nrOfBits(8))
-      OPERAND2 (.clock(s_logisimNet13),
-                .clockEnable(s_logisimNet17),
-                .d(s_logisimBus4[7:0]),
-                .q(s_logisimBus20[7:0]),
-                .reset(s_logisimNet14),
-                .tick(1'b1));
+REGISTER_FLIP_FLOP #(.invertClock(0),
+                     .nrOfBits(8))
+   OPERAND2 (.clock(s_logisimNet13),
+             .clockEnable(s_logisimNet17),
+             .d(s_logisimBus4[7:0]),
+             .q(s_logisimBus20[7:0]),
+             .reset(s_logisimNet14),
+             .tick(1'b1));
 
-   REGISTER_LATCH #(.invertClock(0),
-                    .nrOfBits(8))
-      OPCODE (.clock(s_logisimNet13),
-              .clockEnable(s_logisimNet24),
-              .d(s_logisimBus4[7:0]),
-              .q(s_logisimBus19[7:0]),
-              .reset(s_logisimNet14),
-              .tick(1'b1));
+REGISTER_FLIP_FLOP #(.invertClock(0),
+                     .nrOfBits(8))
+   OPCODE (.clock(s_logisimNet13),
+           .clockEnable(s_logisimNet24),
+           .d(s_logisimBus4[7:0]),
+           .q(s_logisimBus19[7:0]),
+           .reset(s_logisimNet14),
+           .tick(1'b1));
 
-   REGISTER_LATCH #(.invertClock(0),
-                    .nrOfBits(8))
-      OPERAND1 (.clock(s_logisimNet13),
-                .clockEnable(s_logisimNet37),
-                .d(s_logisimBus4[7:0]),
-                .q(s_logisimBus5[7:0]),
-                .reset(s_logisimNet14),
-                .tick(1'b1));
+REGISTER_FLIP_FLOP #(.invertClock(0),
+                     .nrOfBits(8))
+   OPERAND1 (.clock(s_logisimNet13),
+             .clockEnable(s_logisimNet37),
+             .d(s_logisimBus4[7:0]),
+             .q(s_logisimBus5[7:0]),
+             .reset(s_logisimNet14),
+             .tick(1'b1));
 
 
    /*******************************************************************************
