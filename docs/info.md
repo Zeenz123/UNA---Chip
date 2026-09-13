@@ -18,3 +18,10 @@ Explain how to use your project
 ## External hardware
 
 List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+# Project Una
+
+## How it works
+This is an 8-bit CPU design exported directly from Logisim-evolution.
+
+## How to test
+Provide a clock signal to simulate circuit instructions.
