@@ -1,3 +1,6 @@
+/* verilator lint_off PINCONNECTEMPTY */
+/* verilator lint_off PINMISSING */
+/* verilator lint_off UNUSEDSIGNAL */
 /******************************************************************************
  ** Logisim-evolution goes FPGA automatic generated Verilog code             **
  ** https://github.com/logisim-evolution/                                    **
@@ -2163,3 +2166,4 @@ module CPU( ADDRESSBUSOUT,
                     .RST(s_logisimNet10));
 
 endmodule
+
