@@ -23,7 +23,7 @@ module tt_um_CPU (
     // Route your 8-bit CPU data bus to the physical chip output pins
     assign uo_out = w_data_out;
 
-    // The Top Module instantiates your custom core here:
+    // The Top Module instantiates your custom core layout natively:
     CPU my_custom_processor (
         .CLK           (clk),              
         .RST           (~rst_n),           
@@ -145,6 +145,7 @@ module Multiplexer_bus_16 #(parameter nrOfBits = 8) (
     end
 endmodule
 
+// Aligned clockEnable pin parameter naming to match your Logisim CPU requirements directly
 module REGISTER_FLIP_FLOP #(parameter invertClock = 0, parameter nrOfBits = 8) (
     input clock, clockEnable, reset, tick, input [nrOfBits-1:0] d, output reg [nrOfBits-1:0] q
 );
@@ -154,6 +155,7 @@ module REGISTER_FLIP_FLOP #(parameter invertClock = 0, parameter nrOfBits = 8) (
     end
 endmodule
 
+// Aligned Logisim counter configurations to safely allow empty compareOut output ports
 module LogisimCounter #(parameter invertClock = 0, parameter maxVal = 16'hFFFF, parameter mode = 0, parameter width = 16) (
     input clear, clock, enable, load, upNotDown, tick, input [width-1:0] loadData, output reg [width-1:0] countValue, output compareOut
 );
@@ -168,7 +170,7 @@ module LogisimCounter #(parameter invertClock = 0, parameter maxVal = 16'hFFFF, 
 endmodule
 
 /* ==========================================================================
-   3. ALU AND ADVANCED MATHEMATICAL BUS PRIMITIVES (NEWLY ADDED)
+   3. ALU AND ADVANCED MATHEMATICAL BUS PRIMITIVES (MAPPED TO LOGISIM PORTS)
    ========================================================================== */
 
 module NOR_GATE_8_INPUTS #(parameter BubblesMask = 8'h00) (
@@ -195,24 +197,21 @@ module Negator #(parameter nrOfBits = 8) (
     assign dataout = ~datain;
 endmodule
 
+// Port Map: Bridges your CPU's custom Comparator layout arrays directly (dataA, dataB, aEqualsB)
 module Comparator #(parameter nrOfBits = 8) (
-    input [nrOfBits-1:0] input1, input2, output equal, lessThan, greaterThan
+    input [nrOfBits-1:0] dataA, dataB, input twosComplement,
+    output aEqualsB, aLessThanB, aGreaterThanB
 );
-    assign equal       = (input1 == input2);
-    assign lessThan    = (input1 < input2);
-    assign greaterThan = (input1 > input2);
+    assign aEqualsB      = (dataA == dataB);
+    assign aLessThanB    = (dataA < dataB);
+    assign aGreaterThanB = (dataA > dataB);
 endmodule
 
 module REGISTER_LATCH #(parameter invertClock = 0, parameter nrOfBits = 8) (
-    input clock, 
-    input [nrOfBits-1:0] d,         // <-- The 'input' keyword must be here!
-    output reg [nrOfBits-1:0] q, 
-    input reset, 
-    input tick
+    input clock, input [nrOfBits-1:0] d, output reg [nrOfBits-1:0] q, input reset, tick
 );
     always @(posedge clock or posedge reset) begin
         if (reset) q <= 0;
         else if (tick) q <= d;
     end
 endmodule
-
