@@ -1,6 +1,6 @@
 # Tiny Tapeout project information
 project:
-  title:        "Project una"      # Project title
+  title:        "Project UNA CPU"      # Project title
   author:       "Zeenz"            # Your name
   discord:      ""                 
   description:  "Its a basic 8 bit processor with so many instructions"      
