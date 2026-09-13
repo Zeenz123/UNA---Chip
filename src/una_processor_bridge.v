@@ -150,12 +150,14 @@ module Multiplexer_bus_16 #(parameter nrOfBits = 8) (
     end
 endmodule
 
+// Dual-Input Resolution: Supports both clockEnable and clockenable pin assignments perfectly
 module REGISTER_FLIP_FLOP #(parameter invertClock = 0, parameter nrOfBits = 8) (
-    input clock, clockEnable, reset, tick, input [nrOfBits-1:0] d, output reg [nrOfBits-1:0] q
+    input clock, clockEnable, clockenable, reset, tick, input [nrOfBits-1:0] d, output reg [nrOfBits-1:0] q
 );
+    wire internal_en = clockEnable | clockenable;
     always @(posedge clock or posedge reset) begin
         if (reset) q <= 0;
-        else if (clockEnable && tick) q <= d;
+        else if (internal_en && tick) q <= d;
     end
 endmodule
 
