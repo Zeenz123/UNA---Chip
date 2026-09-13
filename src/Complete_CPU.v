@@ -2168,8 +2168,8 @@ endmodule
 
 // Tiny Tapeout Top-Level Hardware Wrapper
 module tt_um_CPU (
-    input  wire [7:0] ui_in,    // Dedicated inputs
-    output wire [7:0] uo_out,   // Dedicated outputs
+    input  wire [7:0] ui_in,    // Dedicated inputs from the chip pins
+    output wire [7:0] uo_out,   // Dedicated outputs to the chip pins
     input  wire [7:0] uio_in,   // IOs: Input path
     output wire [7:0] uio_out,  // IOs: Output path
     output wire [7:0] uio_oe,   // IOs: Enable path
@@ -2178,18 +2178,34 @@ module tt_um_CPU (
     input  wire       rst_n     // reset (active low)
 );
 
-    // 1. Assign unused bidirectional pins safely to high-impedance
-    assign uio_out = 8'b00000000;
-    assign uio_oe  = 8'b00000000; // Sets bidirectional pins to input-only mode
+    // Wires to catch your CPU's extra control/address outputs safely
+    wire [15:0] w_address_bus;
+    wire [7:0]  w_data_out;
+    wire        w_btn_2_bus, w_btn_rst, w_gpu_2_bus, w_ram_2_bus, w_rom_2_bus, w_sv_gpu, w_sv_ram;
 
-    // 2. Instantiate your custom Logisim CPU
-    // Replace the pin names inside the parentheses below (.custom_pin) 
-    // to map to Tiny Tapeout's inputs (ui_in) and outputs (uo_out)
+    // Assign unused bidirectional pins safely to high-impedance
+    assign uio_out = 8'b00000000;
+    assign uio_oe  = 8'b00000000; 
+
+    // Output Mapping: Route your 8-bit CPU data bus directly to the physical chip outputs
+    assign uo_out = w_data_out;
+
+    // Instantiate your complete Logisim-generated processor core
     CPU my_custom_processor (
-        .CLK             (clk),          // Maps Tiny Tapeout clock to your CPU clock
-        .RESET           (~rst_n),       // Inverts active-low rst_n to your active-high reset if needed
-        .INPUT_BUS       (ui_in),        // Maps the 8 external inputs to your input bus
-        .OUTPUT_BUS      (uo_out)        // Maps your CPU output bus to the 8 chip outputs
+        .CLK           (clk),              // Maps Tiny Tapeout hardware clock to CPU clock
+        .RST           (~rst_n),           // Inverts active-low rst_n to feed your CPU active-high RST
+        .DATABUSIN     (ui_in),            // Connects the external 8-bit chip inputs to your data bus
+        .DATABUSOUT    (w_data_out),       // Drives the output wire mesh mapped to chip pins
+        .ADDRESSBUSOUT (w_address_bus),    // Catches the 16-bit address line safely
+        .BUTTONPRESSED (1'b0),             // Tied safely low to prevent floating signal crashes
+        .BUTTONRST     (w_btn_rst),        // Internal hook for your state machine
+        .BUTTON2BUS    (w_btn_2_bus),
+        .GPU2BUS       (w_gpu_2_bus),
+        .RAM2BUS       (w_ram_2_bus),
+        .ROM2BUS       (w_rom_2_bus),
+        .SVGPU         (w_sv_gpu),
+        .SVRAM         (w_sv_ram)
     );
 
 endmodule
+
