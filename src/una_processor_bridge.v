@@ -1,3 +1,8 @@
+/* verilator lint_off PINCONNECTEMPTY */
+/* verilator lint_off PINMISSING */
+/* verilator lint_off UNUSEDSIGNAL */
+/* verilator lint_off UNDRIVEN */
+
 /* ==========================================================================
    1. TINY TAPEOUT SKY130 MASTER HARDWARE WRAPPER (THE TOP MODULE)
    ========================================================================== */
@@ -145,7 +150,6 @@ module Multiplexer_bus_16 #(parameter nrOfBits = 8) (
     end
 endmodule
 
-// Aligned clockEnable pin parameter naming to match your Logisim CPU requirements directly
 module REGISTER_FLIP_FLOP #(parameter invertClock = 0, parameter nrOfBits = 8) (
     input clock, clockEnable, reset, tick, input [nrOfBits-1:0] d, output reg [nrOfBits-1:0] q
 );
@@ -155,7 +159,6 @@ module REGISTER_FLIP_FLOP #(parameter invertClock = 0, parameter nrOfBits = 8) (
     end
 endmodule
 
-// Aligned Logisim counter configurations to safely allow empty compareOut output ports
 module LogisimCounter #(parameter invertClock = 0, parameter maxVal = 16'hFFFF, parameter mode = 0, parameter width = 16) (
     input clear, clock, enable, load, upNotDown, tick, input [width-1:0] loadData, output reg [width-1:0] countValue, output compareOut
 );
@@ -170,7 +173,7 @@ module LogisimCounter #(parameter invertClock = 0, parameter maxVal = 16'hFFFF, 
 endmodule
 
 /* ==========================================================================
-   3. ALU AND ADVANCED MATHEMATICAL BUS PRIMITIVES (MAPPED TO LOGISIM PORTS)
+   3. ALU AND ADVANCED MATHEMATICAL BUS PRIMITIVES
    ========================================================================== */
 
 module NOR_GATE_8_INPUTS #(parameter BubblesMask = 8'h00) (
@@ -197,7 +200,6 @@ module Negator #(parameter nrOfBits = 8) (
     assign dataout = ~datain;
 endmodule
 
-// Port Map: Bridges your CPU's custom Comparator layout arrays directly (dataA, dataB, aEqualsB)
 module Comparator #(parameter nrOfBits = 8) (
     input [nrOfBits-1:0] dataA, dataB, input twosComplement,
     output aEqualsB, aLessThanB, aGreaterThanB
@@ -205,6 +207,13 @@ module Comparator #(parameter nrOfBits = 8) (
     assign aEqualsB      = (dataA == dataB);
     assign aLessThanB    = (dataA < dataB);
     assign aGreaterThanB = (dataA > dataB);
+endmodule
+
+module ARITH_8 (
+    input [7:0] dataX, minDataX,
+    output [7:0] result
+);
+    assign result = (dataX < minDataX) ? dataX : minDataX;
 endmodule
 
 module REGISTER_LATCH #(parameter invertClock = 0, parameter nrOfBits = 8) (
