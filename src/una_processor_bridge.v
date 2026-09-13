@@ -204,10 +204,15 @@ module Comparator #(parameter nrOfBits = 8) (
 endmodule
 
 module REGISTER_LATCH #(parameter invertClock = 0, parameter nrOfBits = 8) (
-    input clock, [nrOfBits-1:0] d, output reg [nrOfBits-1:0] q, input reset, tick
+    input clock, 
+    input [nrOfBits-1:0] d,         // <-- The 'input' keyword must be here!
+    output reg [nrOfBits-1:0] q, 
+    input reset, 
+    input tick
 );
     always @(posedge clock or posedge reset) begin
         if (reset) q <= 0;
         else if (tick) q <= d;
     end
 endmodule
+
