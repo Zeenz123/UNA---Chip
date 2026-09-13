@@ -23,7 +23,7 @@ module tt_um_CPU (
     // Route your 8-bit CPU data bus to the physical chip output pins
     assign uo_out = w_data_out;
 
-    // The Top Module calls your custom Logisim CPU here:
+    // The Top Module instantiates your custom core here:
     CPU my_custom_processor (
         .CLK           (clk),              
         .RST           (~rst_n),           
@@ -164,5 +164,50 @@ module LogisimCounter #(parameter invertClock = 0, parameter maxVal = 16'hFFFF, 
             if (load) countValue <= loadData;
             else if (enable) countValue <= upNotDown ? (countValue + 1) : (countValue - 1);
         end
+    end
+endmodule
+
+/* ==========================================================================
+   3. ALU AND ADVANCED MATHEMATICAL BUS PRIMITIVES (NEWLY ADDED)
+   ========================================================================== */
+
+module NOR_GATE_8_INPUTS #(parameter BubblesMask = 8'h00) (
+    input input1, input2, input3, input4, input5, input6, input7, input8, output result
+);
+    assign result = ~(input1 | input2 | input3 | input4 | input5 | input6 | input7 | input8);
+endmodule
+
+module OR_GATE_BUS #(parameter BubblesMask = 2'b00, parameter nrOfBits = 8) (
+    input [nrOfBits-1:0] input1, input2, output [nrOfBits-1:0] result
+);
+    assign result = input1 | input2;
+endmodule
+
+module XOR_GATE_BUS_ONEHOT #(parameter BubblesMask = 2'b00, parameter nrOfBits = 8) (
+    input [nrOfBits-1:0] input1, input2, output [nrOfBits-1:0] result
+);
+    assign result = input1 ^ input2;
+endmodule
+
+module Negator #(parameter nrOfBits = 8) (
+    input [nrOfBits-1:0] datain, output [nrOfBits-1:0] dataout
+);
+    assign dataout = ~datain;
+endmodule
+
+module Comparator #(parameter nrOfBits = 8) (
+    input [nrOfBits-1:0] input1, input2, output equal, lessThan, greaterThan
+);
+    assign equal       = (input1 == input2);
+    assign lessThan    = (input1 < input2);
+    assign greaterThan = (input1 > input2);
+endmodule
+
+module REGISTER_LATCH #(parameter invertClock = 0, parameter nrOfBits = 8) (
+    input clock, [nrOfBits-1:0] d, output reg [nrOfBits-1:0] q, input reset, tick
+);
+    always @(posedge clock or posedge reset) begin
+        if (reset) q <= 0;
+        else if (tick) q <= d;
     end
 endmodule
