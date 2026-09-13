@@ -6,7 +6,9 @@ SIM ?= icarus
 FST ?= -fst # Use more efficient FST format
 TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(PWD)/../src
-PROJECT_SOURCES = project.v
+# VERILOG_SOURCES is used for the simulation, list your design files here:
+VERILOG_SOURCES = $(PWD)/../src/una_processor_bridge.v $(PWD)/../src/Complete_CPU.v
+
 
 ifneq ($(GATES),yes)
 
