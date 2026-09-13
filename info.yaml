@@ -1,54 +1,54 @@
 # Tiny Tapeout project information
 project:
   title:        "Project una"      # Project title
-  author:       "Zeenz"      # Your name
-  discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  "Its a basic 8 bit processor with so many instructions"      # One line description of what your project does
-  language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
-  clock_hz:     1000000       # Clock frequency in Hz (or 0 if not applicable)
+  author:       "Zeenz"            # Your name
+  discord:      ""                 
+  description:  "Its a basic 8 bit processor with so many instructions"      
+  language:     "Verilog" 
+  clock_hz:     1000000       
 
-  # How many tiles your design occupies? A single tile is about 167x108 uM.
-  tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+  # How many tiles your design occupies?
+  tiles: "1x1"          
 
-  # Your top module name must start with "tt_um_". Make it unique by including your github username:
+  # Your top module name must start with "tt_um_".
   top_module:  "tt_um_CPU"
 
   # List your project's source files here.
   source_files:
+    - "una_processor_bridge.v"
     - "Complete_CPU.v"
 
-# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
-# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
+# The pinout of your project.
 pinout:
   # Inputs
-  ui[0]: "input_0"
-  ui[1]: "input_1"
-  ui[2]: "input_2"
-  ui[3]: "input_3"
-  ui[4]: "input_4"
-  ui[5]: "input_5"
-  ui[6]: "input_6"
-  ui[7]: "input_7"
+  ui: "input_0"
+  ui: "input_1"
+  ui: "input_2"
+  ui: "input_3"
+  ui: "input_4"
+  ui: "input_5"
+  ui: "input_6"
+  ui: "input_7"
 
   # Outputs
-  uo[0]: "output_0"
-  uo[1]: "output_1"
-  uo[2]: "output_2"
-  uo[3]: "output_3"
-  uo[4]: "output_4"
-  uo[5]: "output_5"
-  uo[6]: "output_6"
-  uo[7]: "output_7"
+  uo: "output_0"
+  uo: "output_1"
+  uo: "output_2"
+  uo: "output_3"
+  uo: "output_4"
+  uo: "output_5"
+  uo: "output_6"
+  uo: "output_7"
 
   # Bidirectional pins
-  uio[0]: "bidir_0"
-  uio[1]: "bidir_1"
-  uio[2]: "bidir_2"
-  uio[3]: "bidir_3"
-  uio[4]: "bidir_4"
-  uio[5]: "bidir_5"
-  uio[6]: "bidir_6"
-  uio[7]: "bidir_7"
+  uio: "bidir_0"
+  uio: "bidir_1"
+  uio: "bidir_2"
+  uio: "bidir_3"
+  uio: "bidir_4"
+  uio: "bidir_5"
+  uio: "bidir_6"
+  uio: "bidir_7"
 
 # Do not change!
 yaml_version: 6
